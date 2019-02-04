@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <style></style>
+
+
+
+    <script>
+        let width = prompt("Hvad er bredden?");
+        let length = prompt("Hvad er længden?");
+        let isNotWidthNumber = isNaN(width);
+        let isNotLengthNumber = isNaN(length);
+
+        function areal(x, y) {
+            return (x * y);
+        }
+
+        if (isNotWidthNumber == true || isNotLengthNumber == true) {
+            alert("Du kan kun skrive tal!")
+        }
+
+        alert(`Dit areal er Længde: ${length} Bredde: ${width} Arealet er: ${areal(width, length)}`);
+
+        if (confirm("Vil du starte igen?")) {
+            location.reload();
+        }
+
+    </script>
+</body>
+
+</html>
