@@ -24,9 +24,9 @@
 
         if (isNotWidthNumber == true || isNotLengthNumber == true) {
             alert("Du kan kun skrive tal!")
+        } else {
+            alert(`Dit areal er Længde: ${length} Bredde: ${width} Arealet er: ${areal(width, length)}`);
         }
-
-        alert(`Dit areal er Længde: ${length} Bredde: ${width} Arealet er: ${areal(width, length)}`);
 
         if (confirm("Vil du starte igen?")) {
             location.reload();
