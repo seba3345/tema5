@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+
+    <style></style>
+
+
+    <div id="content">
+
+        <div>
+            <a href="https://kea.dk/"> KEA</a>
+        </div>
+        <div>
+            <a href="https://github.com/seba3345">Github</a>
+        </div>
+        <div>
+            <img src="frog.png" alt="frog">
+
+        </div>
+
+    </div>
+
+    <script>
+        let content = document.querySelector("#content");
+        let divFirst = document.querySelector("#content div");
+        let div2 = document.querySelector("#content div + div");
+        let div3 = document.querySelector("#content div + div + div");
+        let kea = document.querySelector("#content div a");
+        let github = document.querySelector("#content div + div a");
+        let frog = document.querySelector("#content img");
+
+
+        console.log(document.querySelector("#content"));
+        console.log(divFirst);
+        console.log(div2);
+        console.log(div3);
+        console.log(kea);
+        console.log(github);
+        console.log(frog);
+    </script>
+</body>
+
+</html>
