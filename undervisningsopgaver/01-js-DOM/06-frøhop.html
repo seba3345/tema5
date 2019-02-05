@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,13 +40,34 @@
         let circle = document.querySelector(".cirkel");
         let frogURL = `http://helf-kea.dk/test/frog.png`;
         let pigURL = `http://helf-kea.dk/test/gris.png`;
-        document.addEventListener("DOMContentLoaded", start)
+        document.addEventListener("DOMContentLoaded", start);
+
+        circle.addEventListener("click", stop);
 
         function start() {
+            square.addEventListener("click", replace);
             console.log("Website er loaded")
             circle.innerHTML = `<img src= ${frogURL} alt= frø>`;
             square.innerHTML = `<img src= ${pigURL} alt= gris>`;
         }
+
+        function replace() {
+            square.removeEventListener("click", replace);
+            square.innerHTML = `<img src= ${frogURL} alt= frø>`;
+            circle.innerHTML = `<img src= ${pigURL} alt= gris>`;
+            square.addEventListener("click", replaceAgain);
+        }
+
+        function replaceAgain() {
+            start();
+        }
+
+        function stop() {
+            square.removeEventListener("click", replace);
+            circle.removeEventListener("click", stop);
+            square.removeEventListener("click", replaceAgain);
+        }
     </script>
 </body>
+
 </html>
