@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .firkant {
+            height: 100px;
+            width: 100px;
+            background: blue;
+            text-align: center;
+            line-height: 100px;
+
+        }
+
+        .cirkel {
+            height: 100px;
+            width: 100px;
+            background: red;
+            border-radius: 100px;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        .newclass {
+            position: absolute;
+            top: 0;
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="firkant"></div>
+    <div class="cirkel"></div>
+
+    <script>
+        let square = document.querySelector(".firkant");
+        let circle = document.querySelector(".cirkel");
+        let frogURL = `http://helf-kea.dk/test/frog.png`;
+        let pigURL = `http://helf-kea.dk/test/gris.png`;
+        document.addEventListener("DOMContentLoaded", start);
+
+
+        function start() {
+            console.log("Website er loaded")
+            circle.addEventListener("click", jump);
+            square.addEventListener("click", jump);
+            circle.innerHTML = `<img src= ${frogURL} alt= frø>`;
+            square.innerHTML = `<img src= ${pigURL} alt= gris>`;
+        }
+
+        function jump() {
+
+            circle.classList.toggle("newclass");
+
+
+        }
+    </script>
+</body>
+
+</html>
