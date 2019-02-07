@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>js-oevelse-1</title>
+    <style>
+        body {
+            color: burlywood;
+        }
+
+        #display {
+            width: 20vw;
+            height: 20vw;
+            border: 1px solid silver;
+            margin: 7vw;
+            padding: 1vw;
+        }
+
+        /*********************/
+    </style>
+
+</head>
+
+<body>
+    <div id="display"></div>
+
+    <script>
+        let box = document.querySelector("#display");
+        let playListe = ["Shape of you", "Martin er en Uranhjort", "Djævlesangen", "Pandekage Dansen", "Koldenætter", "Det kan regne nul ned", "On my way", "24K Magic", "Baracuda"];
+        window.addEventListener("load", start);
+
+        function start() {
+            playListe.forEach(sang => {
+                box.innerHTML += sang + "<br>";
+            });
+        }
+    </script>
+
+</body>
+
+</html>
