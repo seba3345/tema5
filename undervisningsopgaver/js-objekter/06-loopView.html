@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        div {
+            border: solid black 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="all_ani">
+
+    </div>
+
+
+
+
+
+    <script>
+        window.addEventListener("load", start);
+
+        function start() {
+            let animalLine = [{
+                    "navn": "Gris",
+                    "type": "pattedyr",
+                    "billede": "http://helf-kea.dk/test/gris.png",
+                    "levested": "svinefarm"
+                }, {
+                    "navn": "sild",
+                    "type": "fish",
+                    "billede": "http://helf-kea.dk/test/sild.jpg",
+                    "levested": "verdenshavene"
+                }, {
+                    "navn": "Frø",
+                    "type": "Amfibie",
+                    "billede": "http://helf-kea.dk/test/frø.png",
+                    "levested": "søer og åer"
+                }, {
+                    "navn": "Ræv",
+                    "type": "pattedyr",
+                    "billede": "http://helf-kea.dk/test/fox.png",
+                    "levested": "Skov"
+                }, {
+                    "navn": "Krokodille",
+                    "type": "reptil",
+                    "billede": "http://helf-kea.dk/test/kroko.jpg",
+                    "levested": "floder og sumper"
+                }
+
+            ];
+            console.log(animalLine);
+
+            let aniDest = document.querySelector("#all_ani");
+
+
+            animalLine.forEach(animal => {
+
+                aniDest.innerHTML += `
+                        <div id="animal">
+                        <h3>${animal.navn}</h3>
+                        <img src="${animal.billede}" alt="">
+                        <p>${animal.type}</p>
+                        <p>${animal.levested}</p>
+                        </div> `
+            });
+
+        }
+    </script>
+</body>
+
+</html>
