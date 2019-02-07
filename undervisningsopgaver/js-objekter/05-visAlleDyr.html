@@ -52,6 +52,16 @@
             ];
             console.log(animalLine);
 
+            let aniDest = document.querySelector("#all_ani");
+
+
+            animalLine.forEach(animal => {
+
+                aniDest.innerHTML += `${animal.navn} ${animal.type} fra ${animal.levested} <br> `
+
+
+            });
+
         }
     </script>
 </body>
