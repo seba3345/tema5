@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+        body {
+            max-width: 1420px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        img {
+            width: 150px;
+        }
+
+        #all_pers {
+
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+
+
+        }
+
+        a {
+            text-decoration: none;
+            color: darkred;
+            font-size: 3rem;
+        }
+
+        .pers {
+            font-family: monospace;
+            text-align: center;
+            border: solid black 2px;
+            margin: 10px;
+            padding: 10px;
+            background: pink;
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <a href=""></a>
+    <div id="all_pers">
+
+    </div>
+
+    <script>
+        window.addEventListener("load", start);
+
+        function start() {
+            let personLine = [];
+
+            async function getData() {
+                let personData = await fetch("personer.json");
+                personLine = await personData.json();
+                showAll();
+            }
+            console.log(personLine);
+
+            let persDest = document.querySelector("#all_pers");
+
+            function showAll() {
+                personLine.forEach(person => {
+
+                    persDest.innerHTML += `
+                        <div class="pers">
+                            <h2>${person.navn}</h2>
+                            <img src="${person.billede}" alt="">
+                           <br> <a href="https://github.com/${person.github}/tema5">GITHUB</a>
+                        </div> `
+                });
+            }
+
+            getData();
+        }
+
+    </script>
+</body>
+
+</html>
