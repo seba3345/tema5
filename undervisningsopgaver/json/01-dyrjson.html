@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        div {
+            border: solid black 2px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="all_ani">
+
+    </div>
+
+
+
+
+
+    <script>
+        window.addEventListener("load", start);
+
+        function start() {
+            let animalLine = [];
+            console.log(animalLine);
+
+            let aniDest = document.querySelector("#all_ani");
+
+            function showAnimals() {
+                animalLine.forEach(animal => {
+
+                    aniDest.innerHTML += `
+                        <div id="animal">
+                            <h3>${animal.navn}</h3>
+                            <img src="${animal.billede}" alt="">
+                            <p>${animal.type}</p>
+                            <p>${animal.levested}</p>
+                        </div> `
+                });
+            }
+            showAnimals();
+
+        }
+
+    </script>
+</body>
+
+</html>
