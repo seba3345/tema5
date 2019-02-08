@@ -9,7 +9,6 @@
         div {
             border: solid black 2px;
         }
-
     </style>
 </head>
 
@@ -28,6 +27,12 @@
 
         function start() {
             let animalLine = [];
+
+            async function getData() {
+                let animalData = await fetch("dyr.json");
+                animalLine = await animalData.json();
+                showAnimals();
+            }
             console.log(animalLine);
 
             let aniDest = document.querySelector("#all_ani");
@@ -44,10 +49,9 @@
                         </div> `
                 });
             }
-            showAnimals();
 
+            getData();
         }
-
     </script>
 </body>
 
