@@ -33,11 +33,19 @@
             function dishLoop() {
                 dishline.forEach(dish => {
                     dishDest.innerHTML += `
-                        <div class="pers">
-                            <h2>${dish.navn}</h2>
+                        <div class="dish">
+                        <div class="dish_pic">
                             <img src="pics/${dish.billede}" alt="">
-                           <br>
+                        </div>
+                        <div class="dish_txt">
+                            <h2>${dish.navn}</h2>
                             <p>${dish.kort}</p>
+                        </div>
+                        <div class="dish_price">
+                            <p>${dish.pris}</p>
+                            </div>
+                           <br>
+
                         </div> `
                 });
 
