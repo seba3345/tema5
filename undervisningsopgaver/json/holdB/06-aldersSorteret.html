@@ -41,6 +41,12 @@
 
         }
 
+        header {
+            text-align: center;
+
+
+        }
+
         .buttons {
             text-align: center;
 
@@ -54,18 +60,24 @@
 </head>
 
 <body>
-
-
-    <div class="buttons">
+    <header>
         <h1>Alle</h1>
-        <button class="filter valgt" data-hold="alle">Alle</button>
-        <button class="filter" data-hold="a">Hold A</button>
-        <button class="filter" data-hold="b">Hold B</button>
-    </div>
-    <div id="all_pers">
+        <nav class="buttons">
+            <button class="filter valgt" data-hold="alle">Alle</button>
+            <button class="filter" data-hold="a">Hold A</button>
+            <button class="filter" data-hold="b">Hold B</button>
+        </nav>
+    </header>
+    <main>
+        <section id="all_pers">
 
-    </div>
+        </section>
+    </main>
 
+
+    <footer>
+
+    </footer>
     <script>
         window.addEventListener("load", start);
 
@@ -93,11 +105,11 @@
                     if (filter == "alle" || filter == person.hold) {
 
                         persDest.innerHTML += `
-                        <div class="pers">
+                        <article class="person">
                             <h2>${person.navn}</h2>
                             <img src="${person.billede}" alt="">
                            <br> <a href="https://github.com/${person.github}/tema5">GITHUB</a>
-                        </div> `;
+                        </article> `;
                     }
 
                 });
