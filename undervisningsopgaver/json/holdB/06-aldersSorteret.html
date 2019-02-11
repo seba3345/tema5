@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+        body {
+            max-width: 1420px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        img {
+            width: 150px;
+        }
+
+        #all_pers {
+
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+
+
+        }
+
+        a {
+            text-decoration: none;
+            color: darkred;
+            font-size: 3rem;
+        }
+
+        .pers {
+            font-family: monospace;
+            text-align: center;
+            border: solid black 2px;
+            margin: 10px;
+            padding: 10px;
+            background: pink;
+
+        }
+
+        .buttons {
+            text-align: center;
+
+
+        }
+
+        .valgt {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="buttons">
+        <h1>Alle</h1>
+        <button class="filter valgt" data-hold="alle">Alle</button>
+        <button class="filter" data-hold="a">Hold A</button>
+        <button class="filter" data-hold="b">Hold B</button>
+    </div>
+    <div id="all_pers">
+
+    </div>
+
+    <script>
+        window.addEventListener("load", start);
+
+        function start() {
+            let personLine = [];
+            let filter = "alle"
+
+            async function getData() {
+                let personData = await fetch("personer.json");
+                personLine = await personData.json();
+                personLine.sort((a, b) => {
+                    return a.alder - b.alder
+                });
+                showAll();
+            }
+            console.log(personLine);
+
+            let persDest = document.querySelector("#all_pers");
+
+            function showAll() {
+                persDest.innerHTML = "";
+                personLine.forEach(person => {
+
+                    if (filter == "alle" || filter == person.hold) {
+
+                        persDest.innerHTML += `
+                        <div class="pers">
+                            <h2>${person.navn}</h2>
+                            <img src="${person.billede}" alt="">
+                           <br> <a href="https://github.com/${person.github}/tema5">GITHUB</a>
+                        </div> `;
+                    }
+
+                });
+            }
+            document.querySelectorAll(".filter").forEach(knap => {
+                knap.addEventListener("click", addFilter);
+            });
+
+            function addFilter() {
+                let allBtns = document.querySelectorAll(".filter");
+                allBtns.forEach(button => {
+
+                    button.classList.remove("valgt");
+                });
+
+                console.log("Knap Klik");
+                document.querySelector("h1").textContent = this.textContent;
+                this.classList.add("valgt");
+                filter = this.getAttribute("data-hold");
+                showAll();
+            }
+
+
+            getData();
+        }
+    </script>
+</body>
+
+</html>
