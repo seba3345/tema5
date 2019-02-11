@@ -77,9 +77,8 @@
                 let personData = await fetch("personer.json");
                 personLine = await personData.json();
                 personLine.sort((a, b) => {
-                    return b.navn.localeCompare(a.navn);
-                })
-
+                    return a.alder - b.alder
+                });
                 showAll();
             }
             console.log(personLine);
