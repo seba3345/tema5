@@ -44,6 +44,7 @@
         .buttons {
             text-align: center;
 
+
         }
 
         .valgt {
@@ -56,6 +57,7 @@
 
 
     <div class="buttons">
+        <h1>Alle</h1>
         <button class="filter valgt" data-hold="alle">Alle</button>
         <button class="filter" data-hold="a">Hold A</button>
         <button class="filter" data-hold="b">Hold B</button>
@@ -95,17 +97,25 @@
                     }
 
                 });
+            }
+            document.querySelectorAll(".filter").forEach(knap => {
+                knap.addEventListener("click", addFilter);
+            });
 
-                document.querySelectorAll(".filter").forEach(knap => {
-                    knap.addEventListener("click", addFilter)
+            function addFilter() {
+                let allBtns = document.querySelectorAll(".filter");
+                allBtns.forEach(button => {
+
+                    button.classList.remove("valgt");
                 });
 
-                function addFilter() {
-                    console.log("Knap Klik");
-                    filter = this.getAttribute("data-hold");
-                    showAll();
-                }
+                console.log("Knap Klik");
+                document.querySelector("h1").textContent = this.textContent;
+                this.classList.add("valgt");
+                filter = this.getAttribute("data-hold");
+                showAll();
             }
+
 
             getData();
         }
