@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style></style>
+</head>
+
+<body>
+
+    <div id="dishes">
+
+
+    </div>
+
+
+
+    <script>
+        window.addEventListener("load", start);
+
+        function start() {
+            let dishDest = document.querySelector("#dishes");
+            let dishline = [];
+
+            async function getData() {
+                let dishData = await fetch("dishes.json");
+                dishLine = await dishData.json();
+                dishLoop();
+            }
+
+            function dishLoop() {
+                dishline.forEach(dish => {
+                    dishDest.innerHTML += `
+                        <div class="pers">
+                            <h2>${dish.navn}</h2>
+                            <img src="pics/${dish.billede}" alt="">
+                           <br>
+                            <p>${dish.kort}</p>
+                        </div> `
+                });
+
+
+
+
+            }
+
+
+
+            getData();
+        }
+
+    </script>
+</body>
+
+</html>
