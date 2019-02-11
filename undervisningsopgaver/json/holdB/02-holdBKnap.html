@@ -45,6 +45,10 @@
             text-align: center;
 
         }
+
+        .valgt {
+            background: red;
+        }
     </style>
 </head>
 
@@ -52,9 +56,9 @@
 
 
     <div class="buttons">
-        <button class="filter" data-hold="alle">Alle</button>
-        <button class="filter" data-hold="a">A</button>
-        <button class="filter" data-hold="b">B</button>
+        <button class="filter valgt" data-hold="alle">Alle</button>
+        <button class="filter" data-hold="a">Hold A</button>
+        <button class="filter" data-hold="b">Hold B</button>
     </div>
     <div id="all_pers">
 
@@ -65,7 +69,7 @@
 
         function start() {
             let personLine = [];
-            let filter = "b"
+            let filter = "alle"
 
             async function getData() {
                 let personData = await fetch("personer.json");
@@ -77,9 +81,10 @@
             let persDest = document.querySelector("#all_pers");
 
             function showAll() {
+                persDest.innerHTML = "";
                 personLine.forEach(person => {
 
-                    if (person.hold == filter) {
+                    if (filter == "alle" || filter == person.hold) {
 
                         persDest.innerHTML += `
                         <div class="pers">
@@ -90,6 +95,16 @@
                     }
 
                 });
+
+                document.querySelectorAll(".filter").forEach(knap => {
+                    knap.addEventListener("click", addFilter)
+                });
+
+                function addFilter() {
+                    console.log("Knap Klik");
+                    filter = this.getAttribute("data-hold");
+                    showAll();
+                }
             }
 
             getData();
