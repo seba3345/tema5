@@ -21,6 +21,8 @@
             grid-template-columns: 2fr 3fr 1fr;
             color: white;
             border-bottom: white 2px solid;
+
+
         }
 
         .dish:first-child {
@@ -29,6 +31,15 @@
 
         .dish:nth-child(2) {
             border-top: white 2px solid;
+        }
+
+        .dish:nth-child(even) {
+            border-left: white 2px solid;
+        }
+
+        .dish:last-child {
+            border-right: white 2px solid;
+            border-bottom: none;
         }
 
         nav {

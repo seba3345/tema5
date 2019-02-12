@@ -169,16 +169,7 @@
         "oprindelse": "Rusland",
         "billede": "groggiroshorn"
   },
-    {
-        "id": 54,
-        "kategori": "desserter",
-        "navn": "Søde, syltede løg",
-        "pris": 59,
-        "kort": "En lækker potpourri af søde, syltede løg",
-        "lang": "Et lækkert festfyrværkeri af festlige søde, vodkasyltede løg",
-        "oprindelse": "Moskva",
-        "billede": "syltedeloeg"
-  },
+
     {
         "id": 55,
         "kategori": "drikkevarer",
@@ -258,15 +249,5 @@
         "lang": "Russisk salat med ærter, bønner, gulerødder og mayonnaise fra Volgograd",
         "oprindelse": "Volgograd",
         "billede": "russisksalat"
-  },
-    {
-        "id": 80,
-        "kategori": "sideorders",
-        "navn": "Kogte kartofler",
-        "pris": 29,
-        "kort": "Kogte kartofler med Murmanske krydderurter",
-        "lang": "Kogte kartofler, dyrket i Murmansk og med spændende murmanske krydderurter indsamlet i Murmansk af murmanskanere",
-        "oprindelse": "Murmansk",
-        "billede": "kartofler"
   }
 ]

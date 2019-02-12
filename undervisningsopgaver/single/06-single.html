@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+        body {
+            max-width: 1420px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        #singleview {
+            max-width: 1420px;
+            height: 100vh;
+            width: 100vw;
+            background: red;
+            border-radius: 100px;
+
+        }
+
+        #indhold {
+            background: pink;
+            height: 80%;
+            width: 80%;
+            margin: auto;
+            margin-top: 6%;
+            border-radius: 100px;
+            text-align: center;
+            padding: 5%;
+        }
+
+        #luk {
+            position: absolute;
+            background: red;
+            color: white;
+            left: 94%;
+            top: 3%;
+            font-size: 4rem;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <header>
+
+
+    </header>
+    <main>
+        <div id="singleview">
+            <div id="indhold"></div>
+            <button id="luk">x</button>
+        </div>
+    </main>
+
+
+    <footer>
+
+    </footer>
+    <script>
+        let urlParams = new URLSearchParams(window.location.search);
+        let github = urlParams.get("github");
+        console.log(github);
+        let person;
+        window.addEventListener("load", start);
+
+        function start() {
+            let personLine = [];
+            let filter = "alle"
+
+            async function getData() {
+                let personData = await fetch("personer.json");
+                personLine = await personData.json();
+                let person;
+                personLine.forEach(obj => {
+                    if (obj.github == github) {
+                        person = obj;
+                    }
+                });
+                console.log(person);
+
+                open();
+            }
+            console.log(personLine);
+
+            function open() {
+                //
+                //                 document.querySelector("#indhold").innerHTML = `
+                //                             <article class="person">
+                //                             <img src="${person.billede}" alt="">
+                //                            <h2>${person.navn}</h2>
+                //                                <p> Hold: ${person.hold} <br>
+                //                                    Alder: ${person.alder} </p>
+                //                                    <h3> ${person.navn}'s Historie: </h3>
+                //                                    <p> ${person.historie} </p>
+                //                           <br> <a href="https://github.com/${person.github}/tema5">GITHUB</a>
+                //                        </article> `;
+                //
+                //                            document.querySelector("#popup").style.display = "block";
+            }
+
+            //            let persDest = document.querySelector("#all_pers");
+            //
+            //            function showAll() {
+            //                persDest.innerHTML = "";
+            //                personLine.forEach(person => {
+            //
+            //                    if (filter == "alle" || filter == person.hold) {
+            //
+            //                        let template = `
+            //                        <article class="person">
+            //                            <h2>${person.navn}</h2>
+            //                            <img src="${person.billede}" alt="">
+            //                           <br> <a href="https://github.com/${person.github}/tema5">GITHUB</a>
+            //                        </article> `;
+            //                        persDest.insertAdjacentHTML("beforeend", template);
+            //                        persDest.lastElementChild.addEventListener("click", open);
+            //
+            //                        function open() {
+            //
+            //                            document.querySelector("#indhold").innerHTML = `
+            //                             <article class="person">
+            //                             <img src="${person.billede}" alt="">
+            //                            <h2>${person.navn}</h2>
+            //                                <p> Hold: ${person.hold} <br>
+            //                                    Alder: ${person.alder} </p>
+            //                                    <h3> ${person.navn}'s Historie: </h3>
+            //                                    <p> ${person.historie} </p>
+            //                           <br> <a href="https://github.com/${person.github}/tema5">GITHUB</a>
+            //                        </article> `;
+            //
+            //                            document.querySelector("#popup").style.display = "block";
+            //
+            //                        }
+            //
+            //                    }
+            //
+            //                });
+            //            }
+            //            document.querySelector("#luk").addEventListener("click", () => {
+            //                document.querySelector("#popup").style.display = "none";
+            //            });
+            //            document.querySelectorAll(".filter").forEach(knap => {
+            //                knap.addEventListener("click", addFilter);
+            //            });
+
+            //            function addFilter() {
+            //                let allBtns = document.querySelectorAll(".filter");
+            //                allBtns.forEach(button => {
+            //
+            //                    button.classList.remove("valgt");
+            //                });
+            //
+            //                console.log("Knap Klik");
+            //                document.querySelector("h1").textContent = this.textContent;
+            //                this.classList.add("valgt");
+            //                filter = this.getAttribute("data-hold");
+            //                showAll();
+            //            }
+
+
+            getData();
+        }
+    </script>
+</body>
+
+</html>
