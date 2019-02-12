@@ -16,15 +16,6 @@
             background: black;
         }
 
-        .dish {
-            display: grid;
-            grid-template-columns: 2fr 3fr 1fr;
-            color: white;
-            border-bottom: white 2px solid;
-
-
-        }
-
         .dish_content {
             display: grid;
             grid-template-columns: 2fr 3fr 1fr;
@@ -34,82 +25,14 @@
 
         .dish_pop h2 {
             font-size: 3rem;
+            font-family: 'Teko', sans-serif;
         }
 
         .dish_pop p {
             font-size: 1.5rem;
             text-align: left;
             padding: 40px;
-        }
-
-        .dish:first-child {
-            border-top: white 2px solid;
-        }
-
-        .dish:nth-child(2) {
-            border-top: white 2px solid;
-        }
-
-        .dish:nth-child(even) {
-            border-left: white 2px solid;
-        }
-
-        .dish:last-child {
-            border-right: white 2px solid;
-            border-bottom: none;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-            padding: 2rem;
-
-
-        }
-
-        button {
-            font-size: 1.4rem;
-            font-family: 'Teko', sans-serif;
-            cursor: pointer;
-            border: 2px white solid;
-            border-radius: 0;
-            background: black;
-            padding: 1rem;
-            color: white;
-
-        }
-
-        .valgt {
-            background: #ffff;
-            color: black;
-
-        }
-
-        #all_dishes {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .dish_pic {
-            margin: 1rem;
-
-
-        }
-
-        .dish_txt {
-            font-size: 1rem;
-        }
-
-        .dish_price {
-            font-size: 1.5rem;
-            z-index: -1;
-        }
-
-        .dish_price p {
-            position: absolute;
-            top 50%;
-            left 50%;
+            font-family: 'Khand', sans-serif;
         }
 
         img {
@@ -126,13 +49,11 @@
         }
 
         h2 {
-            font-family: 'Teko', sans-serif;
+
             font-size: 2rem;
         }
 
-        p {
-            font-family: 'Khand', sans-serif;
-        }
+        p {}
 
         #popup {
             max-width: 1420px;
@@ -140,7 +61,7 @@
             height: 100vw;
             background: black;
             position: fixed;
-            display: none;
+
         }
 
         #indhold {
@@ -160,8 +81,9 @@
             position: absolute;
             background: white;
             color: black;
-            left: 1%;
-            top: 3%;
+
+            top: 11vw;
+            left: 3vw;
             font-size: 4rem;
             border: none;
             transform: rotate(180deg);
@@ -176,28 +98,19 @@ font-family: 'Khand', sans-serif;
 </head>
 
 <body>
-    <div id="popup">
+
+    <h1 style="font-size: 6rem;">Bistro Babushka</h1>
+    <div id="single">
         <div id="indhold"></div>
         <button id="luk">➤</button>
-    </div>
-    <h1 style="font-size: 6rem;">Bistro Babushka</h1>
-    <nav>
-        <button class="filter" data-kategori="alle">Alle retter</button>
-        <button class="filter" data-kategori="forretter">Foretter</button>
-        <button class="filter" data-kategori="hovedretter">Hovedretter</button>
-        <button class="filter" data-kategori="desserter">Desserter</button>
-        <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
-        <button class="filter" data-kategori="sideorders">Tilbehør</button>
-
-    </nav>
-    <h1 id="dish_header">Alle retter</h1>
-    <div id="all_dishes">
-
     </div>
 
 
 
     <script>
+        let urlParams = new URLSearchParams(window.location.search);
+        let id = urlParams.get("id");
+        let ret;
         window.addEventListener("load", start);
 
         function start() {
@@ -208,84 +121,92 @@ font-family: 'Khand', sans-serif;
             async function getData() {
                 let dishData = await fetch("dishes.json");
                 dishLine = await dishData.json();
-                console.log(dishLine);
-                dishLoop();
-            }
-
-            function dishLoop() {
-                dishDest.innerHTML = "";
-                dishLine.forEach(dish => {
-
-                    if (filter == "alle" || filter == dish.kategori) {
-
-
-                        let template = `
-                        <div class="dish">
-                        <div class="dish_pic">
-                            <img src="pics/small/${dish.billede}-sm.jpg" alt="">
-                        </div>
-                        <div class="dish_txt">
-                            <h2>${dish.navn}</h2>
-                            <p>${dish.kort}</p>
-                        </div>
-                        <div class="dish_price">
-                            <p>${dish.pris},-</p>
-                            </div>
-                           <br>
-                        </div> `;
-
-                        dishDest.insertAdjacentHTML("beforeend", template);
-                        dishDest.lastElementChild.addEventListener("click", open);
-
-
-                        function open() {
-
-                            document.querySelector("#indhold").innerHTML = `
-                        <div class="dish_pop">
-                            <h2>${dish.navn}</h2>
-                            <div class="dish_content">
-                            <img src="pics/large/${dish.billede}.jpg" alt="">
-                            <p>${dish.lang}</p>
-                            <p>${dish.pris},-</p>
-
-                            </div>
-                        </div> `;
-
-                            document.querySelector("#popup").style.display = "block";
-
-
-
-                        }
+                dishLine.forEach(obj => {
+                    if (obj.id == id) {
+                        ret = obj;
                     }
                 });
+                console.log(dishLine);
+                console.log(ret);
+                open();
             }
 
-            document.querySelectorAll(".filter").forEach(knap => {
-                knap.addEventListener("click", addFilter);
-            });
 
-            document.querySelectorAll(".dish").forEach(popUp => {
-                popUp.addEventListener("click", showPopUp);
-            });
+            function open() {
 
+                document.querySelector("#indhold").innerHTML = `
+                        <div class="dish_pop">
+                            <h2>${ret.navn}</h2>
+                            <div class="dish_content">
+                            <img src="pics/large/${ret.billede}.jpg" alt="">
+                            <p>${ret.lang}</p>
+                            <p>${ret.pris},-</p>
+
+                            </div>
+                        </div> `;
+
+
+            }
             document.querySelector("#luk").addEventListener("click", () => {
-                document.querySelector("#popup").style.display = "none";
+                location.href = "main_single.html";
             });
 
-            function addFilter() {
-                let allBtns = document.querySelectorAll(".filter");
-                allBtns.forEach(button => {
+            //            function dishLoop() {
+            //                dishDest.innerHTML = "";
+            //                dishLine.forEach(dish => {
+            //
+            //                    if (filter == "alle" || filter == dish.kategori) {
+            //
+            //
+            //                        let template = `
+            //                        <div class="dish">
+            //                        <div class="dish_pic">
+            //                            <img src="pics/small/${dish.billede}-sm.jpg" alt="">
+            //                        </div>
+            //                        <div class="dish_txt">
+            //                            <h2>${dish.navn}</h2>
+            //                            <p>${dish.kort}</p>
+            //                        </div>
+            //                        <div class="dish_price">
+            //                            <p>${dish.pris},-</p>
+            //                            </div>
+            //                           <br>
+            //                        </div> `;
+            //
+            //
+            //                    }
+            //
+            //                });
+            //            }
+            //            dishDest.insertAdjacentHTML("beforeend", template);
+            //            dishDest.lastElementChild.addEventListener("click", open);
 
-                    button.classList.remove("valgt");
-                });
-
-                console.log("Knap Klik");
-                document.querySelector("#dish_header").textContent = this.textContent;
-                this.classList.add("valgt");
-                filter = this.getAttribute("data-kategori");
-                console.log(filter);
-                dishLoop();
-            }
+            //            document.querySelectorAll(".filter").forEach(knap => {
+            //                knap.addEventListener("click", addFilter);
+            //            });
+            //
+            //            document.querySelectorAll(".dish").forEach(popUp => {
+            //                popUp.addEventListener("click", showPopUp);
+            //            });
+            //
+            //            document.querySelector("#luk").addEventListener("click", () => {
+            //                document.querySelector("#popup").style.display = "none";
+            //            });
+            //
+            //            function addFilter() {
+            //                let allBtns = document.querySelectorAll(".filter");
+            //                allBtns.forEach(button => {
+            //
+            //                    button.classList.remove("valgt");
+            //                });
+            //
+            //                console.log("Knap Klik");
+            //                document.querySelector("#dish_header").textContent = this.textContent;
+            //                this.classList.add("valgt");
+            //                filter = this.getAttribute("data-kategori");
+            //                console.log(filter);
+            //                dishLoop();
+            //            }
 
 
 

@@ -134,39 +134,6 @@
             font-family: 'Khand', sans-serif;
         }
 
-        #popup {
-            max-width: 1420px;
-            width: 100vw;
-            height: 100vw;
-            background: black;
-            position: fixed;
-            display: none;
-        }
-
-        #indhold {
-
-            height: 25%;
-            width: 80%;
-            margin: auto;
-            margin-top: 6%;
-            text-align: center;
-            padding: 5%;
-            color: white;
-            z-index: 3;
-            border: 5px white solid;
-        }
-
-        #luk {
-            position: absolute;
-            background: white;
-            color: black;
-            left: 1%;
-            top: 3%;
-            font-size: 4rem;
-            border: none;
-            transform: rotate(180deg);
-        }
-
         /*
 font-family: 'Barrio', cursive;
 font-family: 'Teko', sans-serif;
@@ -176,10 +143,6 @@ font-family: 'Khand', sans-serif;
 </head>
 
 <body>
-    <div id="popup">
-        <div id="indhold"></div>
-        <button id="luk">➤</button>
-    </div>
     <h1 style="font-size: 6rem;">Bistro Babushka</h1>
     <nav>
         <button class="filter" data-kategori="alle">Alle retter</button>
@@ -235,27 +198,10 @@ font-family: 'Khand', sans-serif;
                         </div> `;
 
                         dishDest.insertAdjacentHTML("beforeend", template);
-                        dishDest.lastElementChild.addEventListener("click", open);
+                        dishDest.lastElementChild.addEventListener("click", () => {
+                            location.href = "single_view.html?id=" + dish.id;
+                        });
 
-
-                        function open() {
-
-                            document.querySelector("#indhold").innerHTML = `
-                        <div class="dish_pop">
-                            <h2>${dish.navn}</h2>
-                            <div class="dish_content">
-                            <img src="pics/large/${dish.billede}.jpg" alt="">
-                            <p>${dish.lang}</p>
-                            <p>${dish.pris},-</p>
-
-                            </div>
-                        </div> `;
-
-                            document.querySelector("#popup").style.display = "block";
-
-
-
-                        }
                     }
                 });
             }
@@ -264,13 +210,11 @@ font-family: 'Khand', sans-serif;
                 knap.addEventListener("click", addFilter);
             });
 
-            document.querySelectorAll(".dish").forEach(popUp => {
-                popUp.addEventListener("click", showPopUp);
-            });
 
-            document.querySelector("#luk").addEventListener("click", () => {
-                document.querySelector("#popup").style.display = "none";
-            });
+
+            //          document.querySelector("#luk").addEventListener("click", () => {
+            // document.querySelector("#popup").style.display = "none";
+            // });
 
             function addFilter() {
                 let allBtns = document.querySelectorAll(".filter");
