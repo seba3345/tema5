@@ -4,14 +4,130 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <style></style>
+    <link href="https://fonts.googleapis.com/css?family=Barrio|Khand:300,400,700|Teko:300,400,700" rel="stylesheet">
+    <title>Babushka</title>
+
+    <style>
+        body {
+            margin: 0;
+            max-width: 1420px;
+            margin-left: auto;
+            margin-right: auto;
+            background: black;
+        }
+
+        .dish {
+            display: grid;
+            grid-template-columns: 2fr 3fr 1fr;
+            color: white;
+            border-bottom: white 2px solid;
+        }
+
+        .dish:first-child {
+            border-top: white 2px solid;
+        }
+
+        .dish:nth-child(2) {
+            border-top: white 2px solid;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            padding: 2rem;
+
+
+        }
+
+        button {
+            font-size: 1.4rem;
+            font-family: 'Teko', sans-serif;
+            cursor: pointer;
+            border: 2px white solid;
+            border-radius: 0;
+            background: black;
+            padding: 1rem;
+            color: white;
+
+        }
+
+        .valgt {
+            background: #ffff;
+            color: black;
+
+        }
+
+        #all_dishes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .dish_pic {
+            margin: 1rem;
+
+
+        }
+
+        .dish_txt {
+            font-size: 1rem;
+        }
+
+        .dish_price {
+            font-size: 1.5rem;
+        }
+
+        .dish_price p {
+            position: absolute;
+            top 50%;
+            left 50%;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            padding: 2rem;
+            margin: 0;
+            color: white;
+            font-family: 'Barrio', cursive;
+        }
+
+        h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2rem;
+        }
+
+        p {
+            font-family: 'Khand', sans-serif;
+        }
+
+        /*
+font-family: 'Barrio', cursive;
+font-family: 'Teko', sans-serif;
+font-family: 'Khand', sans-serif;
+*/
+    </style>
 </head>
 
 <body>
+    <h1 style="font-size: 6rem;">Babushka</h1>
+    <nav>
+        <button class="filter" data-kategori="alle">Alle retter</button>
+        <button class="filter" data-kategori="forretter">Foretter</button>
+        <button class="filter" data-kategori="hovedretter">Hovedretter</button>
+        <button class="filter" data-kategori="desserter">Desserter</button>
+        <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
+        <button class="filter" data-kategori="sideorders">Tilbehør</button>
 
-    <div id="dishes">
+    </nav>
+    <h1 id="dish_header">Alle retter</h1>
+    <div id="all_dishes">
 
+        <div id="popup"> </div>
 
     </div>
 
@@ -21,44 +137,73 @@
         window.addEventListener("load", start);
 
         function start() {
-            let dishDest = document.querySelector("#dishes");
+            let dishDest = document.querySelector("#all_dishes");
             let dishline = [];
+            let filter = "alle";
 
             async function getData() {
                 let dishData = await fetch("dishes.json");
                 dishLine = await dishData.json();
+                console.log(dishLine);
                 dishLoop();
             }
 
             function dishLoop() {
-                dishline.forEach(dish => {
-                    dishDest.innerHTML += `
+                dishDest.innerHTML = "";
+                dishLine.forEach(dish => {
+
+                    if (filter == "alle" || filter == dish.kategori) {
+
+
+                        dishDest.innerHTML += `
                         <div class="dish">
                         <div class="dish_pic">
-                            <img src="pics/${dish.billede}" alt="">
+                            <img src="pics/small/${dish.billede}-sm.jpg" alt="">
                         </div>
                         <div class="dish_txt">
                             <h2>${dish.navn}</h2>
                             <p>${dish.kort}</p>
                         </div>
                         <div class="dish_price">
-                            <p>${dish.pris}</p>
+                            <p>${dish.pris},-</p>
                             </div>
                            <br>
 
                         </div> `
+                    }
+                });
+            }
+
+            document.querySelectorAll(".filter").forEach(knap => {
+                knap.addEventListener("click", addFilter);
+            });
+
+            document.querySelectorAll(".dish").forEach(popUp => {
+                popUp.addEventListener("click", showPopUp);
+            });
+
+            function addFilter() {
+                let allBtns = document.querySelectorAll(".filter");
+                allBtns.forEach(button => {
+
+                    button.classList.remove("valgt");
                 });
 
-
-
-
+                console.log("Knap Klik");
+                document.querySelector("#dish_header").textContent = this.textContent;
+                this.classList.add("valgt");
+                filter = this.getAttribute("data-kategori");
+                console.log(filter);
+                dishLoop();
             }
+
+
+
 
 
 
             getData();
         }
-
     </script>
 </body>
 
