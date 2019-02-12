@@ -15,7 +15,6 @@
 
         #singleview {
             max-width: 1420px;
-            height: 100vh;
             width: 100vw;
             background: red;
             border-radius: 100px;
@@ -42,6 +41,7 @@
             font-size: 4rem;
             border: none;
         }
+
     </style>
 </head>
 
@@ -78,7 +78,6 @@
             async function getData() {
                 let personData = await fetch("personer.json");
                 personLine = await personData.json();
-                let person;
                 personLine.forEach(obj => {
                     if (obj.github == github) {
                         person = obj;
@@ -91,20 +90,21 @@
             console.log(personLine);
 
             function open() {
-                //
-                //                 document.querySelector("#indhold").innerHTML = `
-                //                             <article class="person">
-                //                             <img src="${person.billede}" alt="">
-                //                            <h2>${person.navn}</h2>
-                //                                <p> Hold: ${person.hold} <br>
-                //                                    Alder: ${person.alder} </p>
-                //                                    <h3> ${person.navn}'s Historie: </h3>
-                //                                    <p> ${person.historie} </p>
-                //                           <br> <a href="https://github.com/${person.github}/tema5">GITHUB</a>
-                //                        </article> `;
-                //
-                //                            document.querySelector("#popup").style.display = "block";
+                document.querySelector("#indhold").innerHTML = `
+                    <article class="person">
+                        <img src="${person.billede}" alt="">
+                        <h2>${person.navn}</h2>
+                        <p>  Hold: ${person.hold} <br>
+                            Alder: ${person.alder} </p>
+                        <h3> ${person.navn}'s Historie: </h3>
+                        <p> ${person.historie} </p>
+                        <br> <a     href="https://github.com/${person.github}/tema5">GITHUB</a>
+                    </article> `;
             }
+
+            document.querySelector("#luk").addEventListener("click", () => {
+                location.href = "05-kald.html";
+            });
 
             //            let persDest = document.querySelector("#all_pers");
             //
@@ -168,6 +168,7 @@
 
             getData();
         }
+
     </script>
 </body>
 
